@@ -52,6 +52,12 @@ function needsModerator(){return Object.entries(state.roles).some(([k,n])=>n>0&&
 function configError(){const n=state.players.length,t=totalRoles(),manual=needsModerator()||state.settings.mode==='moderator';if(t!==n)return t<n?`Chọn thêm ${n-t} vai để bắt đầu.`:'Điều chỉnh bộ vai cho số người hiện tại.';for(const [k,count]of Object.entries(state.roles)){if(count>roleLimit(k))return 'Vai '+ROLES[k].name+' vượt giới hạn.';if(count&&ROLES[k].random&&!randomPool(k).length)return 'Chọn danh sách rút cho '+ROLES[k].name+'.';if(count&&ROLES[k].houseRule&&!(state.houseRules?.[k]||'').trim())return 'Mở chi tiết '+ROLES[k].name+' và ghi luật của nhóm trước khi chia.'}if(needsModerator()&&state.settings.mode!=='moderator')return 'Bộ này cần quản trò riêng để xử lý kỹ năng.';if(!manual&&wolfCount()<1)return 'Ngôi làng cần ít nhất một Sói.';if(!manual&&wolfCount()>=n/2)return 'Số Sói phải ít hơn một nửa số người.';return ''}
 function buildDeck(){const fixed=[],slots=[],counts={};for(const[k,n]of Object.entries(state.roles))for(let i=0;i<n;i++){if(ROLES[k].random)slots.push(k);else{fixed.push(k);counts[k]=(counts[k]||0)+1}}slots.sort((a,b)=>randomPool(a).length-randomPool(b).length);let attempts=0;function fill(index){if(index===slots.length)return [];if(attempts++>20000)return null;for(const k of shuffle([...randomPool(slots[index])])){if((counts[k]||0)>=roleLimit(k))continue;counts[k]=(counts[k]||0)+1;const tail=fill(index+1);if(tail)return [k,...tail];counts[k]--}return null}const drawn=fill(0);return drawn?shuffle([...fixed,...drawn]):null}
 const ROLE_PLAY_GUIDES = {
+  'Watchdog': [
+    ['Chọn ai mỗi đêm?', 'Chọn người cho chó chặn Sói và người cho chó chặn Sát nhân. Có thể chia mỗi chó canh một người hoặc cử cả hai canh cùng một người.'],
+    ['Ví dụ', 'Cử chó chặn Sói canh Minh và chó chặn Sát nhân canh An. Sói cắn Minh thì Minh được cứu. Nếu Sói cắn An, chó đang canh An không chặn được đòn đó.'],
+    ['Tính giới hạn thế nào?', 'Chỉ ghi vào danh sách khi chó thực sự cứu được người. Nếu không có đòn phù hợp, không tính. Cứu cùng một người lần nữa không tăng số người khác nhau. Khi đã cứu đủ ba người khác nhau, cả hai chó hết quyền bảo vệ.'],
+    ['Quản trò làm gì?', 'Ghi riêng mục tiêu của từng chó, đối chiếu nguồn tấn công và ghi tên những người đã được cứu. Quản trò xác nhận kết quả và giới hạn chung.']
+  ],
   'Wolf Time Traveler': [
     ['Khi nào dùng?', 'Mỗi đêm vẫn thức cùng bầy Sói. Từ đêm 3, có thể tua ngược ban ngày hoặc ban đêm, một lần trong cả ván.'],
     ['Quay về đâu?', 'Về đầu ngày trước, trước khi thảo luận và bỏ phiếu. Ví dụ, kích hoạt vào ngày 3 sẽ đưa cả bàn về đầu ngày 2.'],
@@ -261,7 +267,24 @@ case 'dismiss-adjustment':state.setupAdjustment='';save();render();break;
 case 'fill-villagers':{const gap=state.players.length-totalRoles();if(gap>0){rememberRoleSetup();state.roles.villager+=gap;state.preset='custom';save();render()}break}
 case 'remove-with-role':if(removeSetupPlayer(Number(el.dataset.index),el.dataset.role)){modal.close();render()}break;
 case 'role-info':showRoleInfo(el.dataset.role);break;
-case 'picker-more':pickerLimit+=20;document.getElementById('pickerResults').innerHTML=pickerRows();break;
+case 'picker-more': {
+  const results = document.getElementById('pickerResults');
+  const list = results.querySelector('.catalog-scroll');
+  const more = results.querySelector('[data-action="picker-more"]');
+  const scrollTop = list.scrollTop;
+  const shown = list.children.length;
+  pickerLimit += 20;
+  const template = document.createElement('template');
+  template.innerHTML = pickerRows();
+  const newRows = Array.from(template.content.querySelector('.catalog-scroll').children).slice(shown);
+  list.append(...newRows);
+  if (!template.content.querySelector('[data-action="picker-more"]')) {
+    if (document.activeElement === more) newRows[0]?.querySelector('.role-title')?.focus({preventScroll:true});
+    more.remove();
+  }
+  list.scrollTop = scrollTop;
+  break;
+}
 case 'undo-setup':if(undoRoleSetup())render();break;
 case 'picker-reset':resetRoleSearch();render();document.getElementById('roleSearch')?.focus();break;
 case 'library-reset':resetRoleSearch(true);render();document.getElementById('librarySearch')?.focus();break;

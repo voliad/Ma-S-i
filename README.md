@@ -1,4 +1,4 @@
-# Đêm Làng 8.9.1
+# Đêm Làng 8.9.3
 
 Chế độ **Bàn chơi** giữ cách chơi một máy. Chế độ **Chơi nhiều máy** dành cho một quản trò và 5–24 người chơi, mỗi người dùng trình duyệt của mình. Người chơi họp mặt trực tiếp và cần kết nối Internet tới phòng.
 
@@ -27,6 +27,10 @@ Gửi cho nhóm địa chỉ Worker sau khi triển khai. Nếu dùng GitHub, đ
 3. Kiểm tra từng người đã mở thẻ, rồi mở bảng quản trò. Dùng mục **Thông báo và bỏ phiếu trên điện thoại** để mở lượt, xem ai đã gửi, nhập hộ, khóa và công bố kết quả. Quản trò quyết định người bị loại. Kỹ năng vẫn thực hiện trực tiếp tại bàn.
 4. Nếu đóng tab, mở **Chơi nhiều máy → Khôi phục phiên** từ cùng trình duyệt. Để đổi điện thoại, quản trò mở **Phòng → Chuyển máy** cạnh tên người chơi và gửi link riêng. Link dùng một lần, hết hạn sau 5 phút và thay thế quyền truy cập của máy cũ. Nhật ký chi tiết của quản trò được lưu trong trình duyệt quản trò.
 5. Phòng hết hạn sau 24 giờ. Mã ba số chỉ dùng để tìm phòng. Quyền quản trò và quyền xem thẻ dùng khóa riêng. Phiên phòng tạo trên bản mã 12 ký tự không mở được bằng giao diện mới.
+
+## Thử phòng với bot
+
+Trong phòng chờ, quản trò mở **Người chơi → Thêm bot**. Mỗi lần bấm thêm một chỗ, tính vào giới hạn 24 chỗ. Bot được chia vai và tự đánh dấu đã mở thẻ. Dùng **Nhập hộ** để bỏ phiếu cho bot.
 
 ## Chờ ván sau
 

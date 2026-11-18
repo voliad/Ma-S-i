@@ -1,5 +1,5 @@
 {
-  "name": "masoisaov",
+  "name": "dem-lang-online",
   "main": "worker.mjs",
   "compatibility_date": "2025-07-01",
   "assets": {"directory":"./public","binding":"ASSETS","run_worker_first":["/api/*"]},

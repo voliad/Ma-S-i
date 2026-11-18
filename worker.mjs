@@ -112,8 +112,8 @@ export class Room {
         ballot:ballotView,code:room.code, host, phase:room.phase, round:room.round, message:room.message, report:room.report || '',
         revision:host ? room.revision : undefined, houseRules:host ? room.houseRules : undefined,
         self:player ? {id:player.id, hasCard:!!player.role, cardVersion:player.cardVersion, alive:player.alive} : null,
-        players:room.players.map(p => ({id:p.id,name:p.name,alive:p.alive,...(host?{
-          role:p.role, initialRole:p.initialRole, team:p.team, seen:!!p.seen, connected:Date.now() - (p.lastSeen || 0) < 36000, canVote:canVote(p), weight:p.weight, deadVotes:!!p.deadVotes
+        players:room.players.map(p => ({id:p.id,name:p.name,alive:p.alive,bot:!!p.bot,...(host?{
+          role:p.role, initialRole:p.initialRole, team:p.team, seen:!!p.seen, connected:!!p.bot || Date.now() - (p.lastSeen || 0) < 36000, canVote:canVote(p), weight:p.weight, deadVotes:!!p.deadVotes
         }:{})}))});
     }
     return this.storage.transaction(async tx => {
@@ -198,8 +198,18 @@ export class Room {
           await tx.put('room',room);
           return json({key});
         }
+        case 'add-bot': {
+          if (room.phase !== 'lobby') return fail('Chỉ thêm bot trong phòng chờ.',409);
+          const seats = [...room.players,...(room.waiting || [])];
+          if (seats.length >= 24) return fail('Phòng đã đủ 24 chỗ.',409);
+          const names = new Set(seats.map(p => p.name.toLocaleLowerCase('vi')));
+          let number = 1;
+          while (names.has('bot '+number)) number++;
+          room.players.push({id:token(),token:null,name:'Bot '+number,bot:true,alive:true,role:null,weight:1});
+          break;
+        }
         case 'transfer': {
-          if (!room.players.some(p => p.id === input.id)) return fail('Không tìm thấy người chơi.',404);
+          if (!room.players.some(p => p.id === input.id && !p.bot)) return fail('Không tìm thấy người chơi.',404);
           room.transfers ??= {};
           for (const [key,entry] of Object.entries(room.transfers)) {
             if (entry.id === input.id || entry.expires <= Date.now()) delete room.transfers[key];
@@ -298,6 +308,7 @@ export class Room {
           }
           room.players.forEach((p,i) => {
             p.initialRole=p.role=deck[i];
+            if (p.bot) p.seen=true;
             p.team=teamNames[roles[p.role].group];
             p.cardVersion=(p.cardVersion || 0)+1;
           });

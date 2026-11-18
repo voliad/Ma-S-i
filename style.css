@@ -651,3 +651,82 @@ summary{font-size:16px;min-height:44px;padding:8px 0}
 
 /* Assisted skills: large controls and bounded dialogs on phones. */
 .skill-actions,.skill-roster{display:grid;gap:12px;margin:18px 0}.skill-actions button{min-height:52px;text-align:left;white-space:normal}.skill-actions small,.skill-roster small{display:block;font-size:.85rem;line-height:1.5}.skill-roster button{display:flex;align-items:center;gap:12px;text-align:left;min-height:68px}.skill-effects{display:grid;gap:12px}.skill-effects .panel{margin:0}#skillForm select{width:100%;min-height:48px}#skillError{color:#f1b797}dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}@media(max-width:600px){.mod-toolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mod-toolbar button{white-space:normal;min-height:52px}.mod-toolbar>.primary{grid-column:1/-1}}
+
+ .role-symbol-art { background: transparent; }
+.role-artwork { display: inline-block; width: 46px; height: 46px; object-fit: contain; vertical-align: middle; }
+.role-artwork-large { width: 112px; height: 112px; margin-top: 8px; }
+.extra-role-art { margin-block: 24px; }
+.extra-role-art > div { display: flex; flex-wrap: wrap; gap: 16px; }
+.extra-role-art figure { margin: 0; text-align: center; }
+
+.saov-credit a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+.deal-privacy { display: grid; gap: 16px; justify-items: center; margin-block: 16px; }
+.deal-privacy .check {
+  box-sizing: border-box;
+  width: min(100%, 480px);
+  min-height: 64px;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #746b56;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+.deal-privacy .check:has(input:checked) { background: #323526; border-color: #d2ba83; }
+.deal-privacy .check input { width: 24px; height: 24px; flex: 0 0 24px; margin: 0; }
+.deal-privacy .primary { width: min(100%, 480px); min-height: 52px; }
+
+.dealt-role-rules { text-align: left; overflow-wrap: anywhere; }
+
+/* Phòng nhiều máy */
+.topbar .nav[href]{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.room-wrap{width:min(100%,820px);margin:0 auto;padding-block:12px 32px}
+.room-entry{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))}
+.room-panel{margin:0 0 16px;padding:clamp(16px,4vw,28px);border:1px solid var(--line,#3a433b);border-radius:14px;background:var(--panel,#1e2320)}
+.room-panel h1,.room-panel h2{margin-top:0}
+.room-panel form{margin-top:16px}
+.room-panel button,.room-panel a.primary,.room-board-bar a{min-height:48px}
+.room-panel a.primary,.room-board-bar a,.game-stage a.primary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.room-panel .catalog-scroll{max-height:430px;overflow:auto;margin-block:12px;overscroll-behavior:contain}
+.room-privacy{display:flex;align-items:center;justify-content:center;gap:12px;min-height:52px;margin-block:8px 12px}
+.room-privacy input{width:26px;height:26px;flex:none}
+.room-card{text-align:center}
+.room-card .role-artwork{margin:0 auto}
+.room-card button{margin:4px}
+.room-stepper{display:flex;align-items:center;gap:8px}
+.room-stepper button{min-width:44px;padding-inline:10px}
+.room-players li{padding-block:4px}
+.room-players button{margin-inline-start:10px}
+.room-message{white-space:pre-wrap;overflow-wrap:anywhere}
+.room-status:empty{display:none}
+.room-board-bar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;width:min(100% - 32px,1000px);margin:12px auto}
+@media(max-width:600px){.topbar .nav{min-height:44px}.topbar nav{flex-wrap:wrap}.topbar .nav[href]{padding-inline:8px}}
+
+@media(max-width:480px){.topbar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.room-panel .role-row{gap:8px}.room-stepper{gap:4px}}
+.room-deck-actions{display:flex;gap:12px;flex-wrap:wrap}
+.room-deck-actions [hidden]{display:none}
+
+.room-code{font-size:1.55rem;letter-spacing:.14em;color:var(--gold2);font-weight:700}
+.room-buttons{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-block:8px}
+.room-buttons [aria-pressed="true"]{border-color:var(--gold);color:var(--gold2)}
+.room-players{padding:0;list-style:none}
+.room-players li{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:10px 0}
+.room-players li div{flex:1 1 135px;min-width:0;overflow-wrap:anywhere}
+.room-players small{display:block;color:var(--muted)}
+.room-players button{margin:0}
+.room-qr{display:block;width:min(100%,300px);aspect-ratio:1;margin:0 auto;background:#fff}
+.room-board-bar{display:block}
+.room-board-tools{padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.room-board-tools summary,.room-panel summary{cursor:pointer;min-height:44px;padding-block:9px}
+.room-board-tools form{margin-block:10px}
+.room-board-tools button{min-height:44px}
+
+.room-rankings{border-collapse:collapse;width:100%;text-align:left}
+.room-rankings th,.room-rankings td{border-bottom:1px solid var(--line);padding:10px 5px;overflow-wrap:anywhere}
+.room-rankings th[scope="row"]{font-weight:600}
+.room-rankings td:first-child{color:var(--gold2);font-weight:700}
+#boardRanks>.room-panel,#boardRanks>div>.room-panel{margin-top:12px}
+
+#roomJoin + [data-room="recover-local"] { margin-block-start: 12px; }

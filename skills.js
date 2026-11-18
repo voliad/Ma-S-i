@@ -9,7 +9,8 @@ const Scheck=SA('role','Xem vai bí mật','role'), Saura=SA('aura','Xem phe / h
 skillProfile('Seer|Wolf Seer|Sorcerer',[Scheck]);
 skillProfile('Aura Seer|Blind Werewolf|Gambler|Pumpkin Oracle',[Saura], 'Kiểm tra ngụy trang, xác suất và giới hạn riêng trước khi cung cấp kết quả.');
 skillProfile('Detective|Analyst',[SA('compare','So sánh phe hai người','compare',2)]);
-skillProfile('Regular Werewolf|Alpha Werewolf|Serial Killer|Accomplice|Lone Wolf|Headless Horseman|Assassin',[Sattack], 'Chọn đúng nguồn tấn công. Mỗi bầy Sói chỉ có một đòn chung mỗi đêm. Assassin sử dụng luật nhóm riêng.');
+skillProfile('Regular Werewolf|Alpha Werewolf|Accomplice|Lone Wolf|Headless Horseman|Assassin',[Sattack], 'Chọn đúng nguồn tấn công. Mỗi bầy Sói chỉ có một đòn chung mỗi đêm. Assassin sử dụng luật nhóm riêng.');
+skillProfile('Serial Killer',[SA('attack','Tấn công của Sát nhân','attack',1,1,{phase:'night',source:'solo'})]);
 skillProfile('Doctor|Night Watchman|Butcher|Snow Angel|Watchdog|Locksmith',[Sprotect], 'Số lần và thời hạn bảo vệ khác nhau theo vai; kiểm tra mô tả, chọn thời hạn phù hợp. Khiên ở đây chặn một đòn, không tự thay thế mọi loại bảo vệ.');
 skillProfile('Bodyguard|Tough Guy|Flagger',[SA('redirect','Đặt người đỡ / chuyển đòn','redirect',2)],'Thứ tự chọn: người được bảo vệ, rồi người nhận đòn thay. Sức bền, phản đòn và vết thương do quản trò xác nhận.');
 skillProfile('Avenger|Junior Werewolf',[SA('revenge','Đặt / đổi mục tiêu khi chết','revenge')]);
@@ -74,7 +75,13 @@ skillProfile('Werewolf Berserk',[SA('frenzy','Bật cuồng nộ cho bầy Sói'
 skillProfile('Confusion Wolf',[SA('hide','Đặt cờ che vai người chết đêm này','hideDeaths',0,0,{phase:'night',uses:2})]);
 skillProfile('Storm Wolf',[SA('shuffle','Đổi vị trí: xác nhận sơ đồ ghế mới','adjudicate',0,0,{uses:1}),SA('hideVotes','Đặt cờ giấu phiếu hôm nay','hideVotes',0,0,{phase:'day',uses:2})]);
 skillProfile('Swamp Wolf',[SA('flood','Đặt luật ngập: hạn chế lời nói hôm nay','flood',0,0,{uses:1}),SA('fakeVotes','Ghi mục tiêu phiếu giả (không cộng phiếu)','fakeVotes',1,1,{phase:'day',uses:1})]);
-skillProfile('Time Traveler|Wolf Time Traveler',[SA('rewind','Mở phân xử quay về ngày trước','adjudicate',0,0,{uses:1,minRound:3})], 'Hoàn tác mốc chỉ phục hồi mốc gần nhất, không phải kỹ năng du hành thời gian. Quản trò phải giữ các chuyển phe ngoài Làng khi phục hồi ngày trước.');
+skillProfile('Time Traveler',[SA('rewind','Tua về đầu ngày trước','rewind',0,0,{phase:'night',uses:1,minRound:3})]);
+skillProfile('Wolf Time Traveler',[SA('rewind','Tua về đầu ngày trước','rewind',0,0,{phase:'both',uses:1,minRound:3})]);
+skillProfile('Watchdog',[
+  SA('watchWolf','Cử chó chặn Sói','watchWolf',1,1,{phase:'night',perRound:1}),
+  SA('watchSolo','Cử chó chặn Sát nhân','watchSolo',1,1,{phase:'night',perRound:1})
+], 'Hai chó có thể canh cùng một người. Khi xác nhận đòn Sói hoặc Sát nhân trong bảng, hệ thống chỉ ghi lượt cứu nếu đúng chó đã chặn đòn.');
+
 skillProfile('Forger',[SA('shield','Trao khiên đã rèn','shield',1,1,{uses:2}),SA('sword','Trao kiếm: ghi người giữ','sword',1,1,{uses:1})], 'Phải rèn đủ một ngày, trao đủ hai khiên trước kiếm.');
 skillProfile('Fortune Teller',[SA('card','Trao thẻ lộ vai','card',1,1,{phase:'night',uses:2})]);
 skillProfile('Judge',[SA('convict','Kết án sau khi kiểm phiếu thất bại','judge',1,1,{phase:'day',uses:2})]);
@@ -88,7 +95,7 @@ skillProfile('Santa Claus|Pumpkin King',[SA('gift','Ghi nhận quà / trao đổ
 
 
 skillProfile('Butcher',[SA('meat','Dùng một miếng thịt bảo vệ','shield',1,1,{phase:'night',uses:6})]);
-skillProfile('Night Watchman',[SA('guard','Bảo vệ đêm này','shield',1,1,{phase:'night',uses:2})]);
+skillProfile('Night Watchman',[SA('guard','Bảo vệ đêm này','shield',1,1,{phase:'night',uses:3,perRound:1})]);
 skillProfile('Snow Angel',[SA('snow','Bảo vệ một đòn trong hai đêm','shield',1,1,{phase:'night',uses:3,duration:3,uniqueTargets:true})]);
 skillProfile('Wolf Scribe|Wolf Trickster|Illusionist',[SA('disguise','Đặt vai ngụy trang đã phân xử','disguise')], 'Giả cáo phó và đòn giết tập thể của Illusionist được áp dụng sau khi quản trò phân xử.');
 SKILL_PROFILES[fold('Evil Cupid')].actions.push(SA('kill','Giết một mục tiêu','attack',1,1,{phase:'night'}));
@@ -101,10 +108,91 @@ function skillPanelButton(id){return `<button type="button" class="primary" data
 const originalShowModPlayer=showModPlayer;
 showModPlayer=function(id){originalShowModPlayer(id);modal.querySelector('.actions').insertAdjacentHTML('afterbegin',skillPanelButton(id));};
 let skillActor=null,skillChoice=null;
-function showSkills(id){const g=state.game,p=byId(id);if(!g?.manual||!secret||!p)return;skillActor=id;skillChoice=null;const profile=skillActions(p.role);modal.innerHTML=`<div class="dialog-head"><h2>Kỹ năng · ${esc(p.name)}</h2><button class="close" data-action="close" aria-label="Đóng">×</button></div><h3>${esc(ROLES[p.role].name)}</h3><p>${esc(ROLES[p.role].desc)}</p>${rolePlayGuide(ROLES[p.role])}${g.houseRules[p.role]?`<p>Luật nhóm: ${esc(g.houseRules[p.role])}</p>`:''}<p class="hint">Bảng hỗ trợ quản trò: các kết quả được áp dụng khi bạn xác nhận. Tương tác phức tạp cần phân xử trước.</p>${profile.note?`<p class="assist-note">${esc(profile.note)}</p>`:''}<div class="skill-actions">${profile.actions.map(a=>{const reason=skillUnavailable(p,a);return `<button class="secondary" data-action="skills-choose" data-skill="${a.id}" ${reason?'disabled':''}>${esc(a.label)}${a.uses?` <small>(${Math.max(0,a.uses-skillUsed(p,a).total)} / ${a.uses})</small>`:''}${reason?`<small>${esc(reason)}</small>`:''}</button>`}).join('')||'<p>Không có kỹ năng chủ động.</p>'}<button class="secondary" data-action="skills-adjudicate">Phân xử & áp dụng kết quả khác</button></div><details><summary>Hiệu ứng & lịch sử riêng</summary>${skillsState().effects.filter(e=>e.actor===id||e.targets.includes(id)).map(e=>`<p>${esc(e.label)} · ${e.until==null?'Duy trì':`còn đến hết ${e.until}`}</p>`).join('')}${skillsState().history.filter(e=>e.actor===id).slice(-10).map(e=>`<p>${esc(e.text)}</p>`).join('')}</details>`;if(!modal.open)modal.showModal();}
+function showSkills(id){const g=state.game,p=byId(id);if(!g?.manual||!secret||!p)return;skillActor=id;skillChoice=null;const profile=skillActions(p.role);modal.innerHTML=`<div class="dialog-head"><h2>Kỹ năng · ${esc(p.name)}</h2><button class="close" data-action="close" aria-label="Đóng">×</button></div><h3>${esc(ROLES[p.role].name)}</h3><p>${esc(ROLES[p.role].desc)}</p>${rolePlayGuide(ROLES[p.role])}${g.houseRules[p.role]?`<p>Luật nhóm: ${esc(g.houseRules[p.role])}</p>`:''}<p class="hint">Bảng hỗ trợ quản trò: các kết quả được áp dụng khi bạn xác nhận. Tương tác phức tạp cần phân xử trước.</p>${ROLES[p.role].english==='Watchdog'?`<p>Đã cứu ${watchdogSaves(p).size} / 3 người khác nhau.</p>`:''}${profile.note?`<p class="assist-note">${esc(profile.note)}</p>`:''}<div class="skill-actions">${profile.actions.map(a=>{const reason=skillUnavailable(p,a);return `<button class="secondary" data-action="skills-choose" data-skill="${a.id}" ${reason?'disabled':''}>${esc(a.label)}${a.uses?` <small>(${Math.max(0,a.uses-skillUsed(p,a).total)} / ${a.uses})</small>`:''}${reason?`<small>${esc(reason)}</small>`:''}</button>`}).join('')||'<p>Không có kỹ năng chủ động.</p>'}<button class="secondary" data-action="skills-adjudicate">Phân xử & áp dụng kết quả khác</button></div><details><summary>Hiệu ứng & lịch sử riêng</summary>${skillsState().effects.filter(e=>e.actor===id||e.targets.includes(id)).map(e=>`<p>${esc(e.label)} · ${e.until==null?'Duy trì':`còn đến hết ${e.until}`}</p>`).join('')}${skillsState().history.filter(e=>e.actor===id).slice(-10).map(e=>`<p>${esc(e.text)}</p>`).join('')}</details>`;if(!modal.open)modal.showModal();}
 function skillUsed(p,a){return skillsState().uses[`${p.id}:${p.role}:${a.id}`]||{total:0,round:0,count:0};}
-function skillUnavailable(p,a){const g=state.game,u=skillUsed(p,a);if(p.skillRestUntil>=g.round&&a.effect==='compare')return 'Đang nghỉ một đêm sau kết quả cùng hào quang';if(a.effect==='packAttack'&&skillsState().effects.some(e=>e.kind==='packSpent'))return 'Bầy Sói đã tấn công giai đoạn này';if(!p.alive&&!a.allowDead)return 'Người dùng đã chết';if((p.modBlocked||activeSkillEffects(p.id,'block').length||activeSkillEffects(p.id,'yule').some(e=>!skillWolf(p)))&&a.effect!=='adjudicate')return 'Đang bị khóa kỹ năng';if(a.phase&&a.phase!==g.mod.phase)return a.phase==='night'?'Dùng ban đêm':'Dùng ban ngày';if(a.minRound&&g.round<a.minRound)return `Từ vòng ${a.minRound}`;if(a.uses&&u.total>=a.uses)return 'Đã hết lượt';if(a.perRound&&u.round===g.round&&u.count>=a.perRound)return 'Đã dùng trong vòng này';if(a.cooldown&&u.total&&g.round<=u.round+a.cooldown)return 'Đang chờ hồi';return '';}
-function chooseSkill(id,custom=false){const p=byId(skillActor),a=custom?SA('custom','Phân xử kết quả','adjudicate',0,24,{allowDead:true,targetAny:true}):skillActions(p.role).actions.find(a=>a.id===id);if(!a)return;skillChoice=a;const targets=state.game.players.filter(t=>a.targetAny||(a.dead?!t.alive:t.alive));modal.innerHTML=`<div class="dialog-head"><h2>${esc(a.label)}</h2><button class="close" data-action="close" aria-label="Đóng">×</button></div><form id="skillForm"><p>${esc(p.name)} · ${esc(ROLES[p.role].name)}</p><p class="hint">Chọn ${a.min===a.max?a.min:`${a.min}–${a.max}`} người${a.min===2?' (theo thứ tự ô bên dưới)':''}. Chưa có thay đổi cho đến khi nhấn Áp dụng.</p>${Array.from({length:a.effect==='adjudicate'?Math.min(4,a.max):a.max},(_,i)=>`<label class="field"><span>Mục tiêu ${i+1}</span><select name="target${i}" ${i<a.min?'required':''}><option value="">Không chọn</option>${targets.map(t=>`<option value="${t.id}">${esc(t.name)}${t.alive?'':' · đã chết'}</option>`).join('')}</select></label>`).join('')}${a.effect==='adjudicate'?`<button type="button" class="secondary" data-action="skills-add-target">Thêm ô mục tiêu</button><label class="field"><span>Kết quả đã phân xử</span><select name="outcome"><option value="note">Chỉ ghi nhận sự kiện</option><option value="kill">Loại các mục tiêu</option><option value="revive">Hồi sinh các mục tiêu</option><option value="transform">Đổi vai các mục tiêu</option><option value="team">Đổi phe, giữ vai</option><option value="shield">Trao một khiên</option><option value="block">Khóa kỹ năng</option><option value="silence">Cấm nói và bỏ phiếu</option><option value="clear">Xóa hiệu ứng hỗ trợ của mục tiêu</option></select></label>`:''}${['adjudicate','disguise','transform'].includes(a.effect)?`<label class="field"><span>Vai kết quả / ngụy trang</span><select name="role"><option value="">Chọn vai nếu cần</option>${modOptions('',null)}</select></label><label class="field"><span>Phe kết quả (nếu đổi phe)</span><input name="team" maxlength="60"></label>`:''}${a.duration===2?'<p class="hint">Hiệu ứng tự hết khi kết thúc ngày ngay sau đêm này.</p>':['shield','block','silence','jail','adjudicate','disguise','redirect'].includes(a.effect)?`<label class="field"><span>Thời hạn hiệu ứng</span><select name="duration"><option value="1">Đến hết giai đoạn này</option><option value="2">Đến hết giai đoạn kế tiếp</option><option value="3">Đến hết hai giai đoạn kế tiếp</option><option value="0">Duy trì đến khi dùng / xóa</option></select></label>`:''}${['attack','kill','meteor','backfire','holy'].includes(a.effect)?`<label class="field"><span>Nguồn tấn công</span><select name="source"><option value="skill">Kỹ năng / đòn đã phân xử</option><option value="wolf">Bầy Sói</option><option value="solo">Sát thủ</option><option value="lynch">Treo cổ</option><option value="pierce">Bỏ qua bảo vệ</option></select></label>`:''}<label class="field"><span>Ghi chú / kết quả gửi riêng</span><textarea name="note" maxlength="1000" rows="2" ${a.effect==='adjudicate'?'required':''}></textarea></label><p id="skillError" role="alert"></p><div class="actions"><button type="button" class="secondary" data-action="skills-open" data-id="${p.id}">Quay lại</button><button class="primary" type="submit">Áp dụng kỹ năng</button></div></form>`;}
+function captureDayStart(game) {
+  const checkpoints = (game.mod.dayStarts || []).filter(day => day.round < game.round);
+  game.mod.dayStarts = [...checkpoints, captureModState(game)].slice(-3);
+}
+
+function rewindPlan(game) {
+  const checkpoint = game.mod.dayStarts?.find(day => day.round === game.round - 1);
+  if (!checkpoint) return null;
+  const conversions = game.players.filter(player => {
+    const previous = checkpoint.players.find(entry => entry.id === player.id);
+    if (!previous || skillTeam(player) === 'Phe Làng' || skillTeam(player) === 'Chưa có phe') return false;
+    return skillTeam(player) !== skillTeam(previous);
+  });
+  return { checkpoint, conversions };
+}
+
+function rewindPreview(game) {
+  const plan = rewindPlan(game);
+  if (!plan) return '<p>Chưa có mốc đầu ngày trước.</p>';
+  const {checkpoint, conversions} = plan;
+  const revived = checkpoint.players.filter(player => player.alive && !byId(player.id)?.alive);
+  const removed = checkpoint.players.filter(player => !player.alive && byId(player.id)?.alive);
+  const currentUses = skillsState().uses;
+  const returned = Object.entries(currentUses).filter(([key, use]) => !key.includes(':watchdog:') && !key.endsWith(':rewind') && use.total > (checkpoint.skills?.uses[key]?.total || 0));
+  const names = players => players.map(player => esc(player.name)).join(', ') || 'Không có';
+  return `<p>Quay lại đầu ngày ${checkpoint.round}.</p>
+    <p>Sống lại: ${names(revived)}.</p><p>Trở lại trạng thái đã bị loại: ${names(removed)}.</p>
+    <p>Giữ phe mới: ${conversions.map(player => esc(player.name + ' (' + skillTeam(player) + ')')).join(', ') || 'Không có'}.</p>
+    <p>Hoàn trả lượt đã dùng: ${returned.map(([key, use]) => {
+      const [id, role, action] = key.split(':');
+      const label = skillActions(role).actions.find(entry => entry.id === action)?.label || action;
+      const count = use.total - (checkpoint.skills?.uses[key]?.total || 0);
+      return esc((byId(Number(id))?.name || id) + ' · ' + label + ' ×' + count);
+    }).join(', ') || 'Không có'}. Lượt tua vừa dùng vẫn bị trừ.</p>`;
+}
+
+function applyRewind(game, actor, action) {
+  const plan = rewindPlan(game);
+  if (!plan) throw Error('Chưa có mốc đầu ngày trước.');
+  const before = structuredClone(game);
+  const spent = `${actor.id}:${actor.role}:${action.id}`;
+  const previousUses = Object.entries(skillsState().uses).filter(([key]) => key.endsWith(':rewind'));
+  modSnapshot();
+  restoreModState(game, plan.checkpoint);
+  game.mod.draft = '';
+  game.mod.draftTarget = '';
+  for (const player of plan.conversions) {
+    const restored = byId(player.id);
+    restored.role = player.role;
+    restored.modTeam = skillTeam(player);
+  }
+  const uses = skillsState().uses;
+  for (const [key, use] of previousUses) if (use.total) uses[key] = use;
+  uses[spent] = {total:1,round:game.round,count:1};
+  const message = 'Đã quay lại đầu ngày ' + game.round + '.';
+  skillRecord(byId(actor.id), action, message);
+  if (!save()) {
+    state.game = before;
+    throw Error('Chưa lưu được ván. Việc tua chưa được áp dụng.');
+  }
+  return message;
+}
+
+const watchdogSaveKey = (actor, target) => `${actor}:watchdog:save-${target}`;
+
+function watchdogSaves(actor) {
+  const id = typeof actor === 'number' ? actor : actor.id;
+  return new Set(state.game.players.filter(player => skillsState().uses[watchdogSaveKey(id, player.id)]?.total).map(player => player.id));
+}
+
+function blockWatchdogAttack(target, source) {
+  const kind = {wolf:'watchWolf',solo:'watchSolo'}[source];
+  if (!kind) return false;
+  const dog = activeSkillEffects(target.id, kind).find(effect => watchdogSaves(effect.actor).size < 3);
+  if (!dog) return false;
+  skillRemove(dog);
+  skillsState().uses[watchdogSaveKey(dog.actor, target.id)] = {total:1,round:state.game.round,count:1};
+  skillRecord(byId(dog.actor), {id:'watchdog-save',label:dog.label,targets:[target.id]}, 'Đã cứu ' + target.name);
+  return true;
+}
+
+function skillUnavailable(p,a){const g=state.game,u=skillUsed(p,a);if(a.effect==='rewind'&&!rewindPlan(g))return 'Chưa có mốc đầu ngày trước';if(['watchWolf','watchSolo'].includes(a.effect)&&watchdogSaves(p).size>=3)return 'Đã cứu đủ 3 người khác nhau';if(p.skillRestUntil>=g.round&&a.effect==='compare')return 'Đang nghỉ một đêm sau kết quả cùng hào quang';if(a.effect==='packAttack'&&skillsState().effects.some(e=>e.kind==='packSpent'))return 'Bầy Sói đã tấn công giai đoạn này';if(!p.alive&&!a.allowDead)return 'Người dùng đã chết';if((p.modBlocked||activeSkillEffects(p.id,'block').length||activeSkillEffects(p.id,'yule').some(e=>!skillWolf(p)))&&a.effect!=='adjudicate')return 'Đang bị khóa kỹ năng';if(a.phase&&a.phase!=='both'&&a.phase!==g.mod.phase)return a.phase==='night'?'Dùng ban đêm':'Dùng ban ngày';if(a.minRound&&g.round<a.minRound)return `Từ vòng ${a.minRound}`;if(a.uses&&u.total>=a.uses)return 'Đã hết lượt';if(a.perRound&&u.round===g.round&&u.count>=a.perRound)return 'Đã dùng trong vòng này';if(a.cooldown&&u.total&&g.round<=u.round+a.cooldown)return 'Đang chờ hồi';return '';}
+function chooseSkill(id,custom=false){const p=byId(skillActor),a=custom?SA('custom','Phân xử kết quả','adjudicate',0,24,{allowDead:true,targetAny:true}):skillActions(p.role).actions.find(a=>a.id===id);if(!a)return;skillChoice=a;const targets=state.game.players.filter(t=>a.targetAny||(a.dead?!t.alive:t.alive));modal.innerHTML=`<div class="dialog-head"><h2>${esc(a.label)}</h2><button class="close" data-action="close" aria-label="Đóng">×</button></div><form id="skillForm"><p>${esc(p.name)} · ${esc(ROLES[p.role].name)}</p>${a.effect==='rewind'?rewindPreview(state.game):''}<p class="hint">Chọn ${a.min===a.max?a.min:`${a.min} đến ${a.max}`} người${a.min===2?' (theo thứ tự ô bên dưới)':''}. Chưa có thay đổi cho đến khi nhấn Áp dụng.</p>${Array.from({length:a.effect==='adjudicate'?Math.min(4,a.max):a.max},(_,i)=>`<label class="field"><span>${['watchWolf','watchSolo'].includes(a.effect)?esc(a.label):'Mục tiêu '+(i+1)}</span><select name="target${i}" ${i<a.min?'required':''}><option value="">Không chọn</option>${targets.map(t=>`<option value="${t.id}">${esc(t.name)}${t.alive?'':' · đã chết'}</option>`).join('')}</select></label>`).join('')}${a.effect==='adjudicate'?`<button type="button" class="secondary" data-action="skills-add-target">Thêm ô mục tiêu</button><label class="field"><span>Kết quả đã phân xử</span><select name="outcome"><option value="note">Chỉ ghi nhận sự kiện</option><option value="kill">Loại các mục tiêu</option><option value="revive">Hồi sinh các mục tiêu</option><option value="transform">Đổi vai các mục tiêu</option><option value="team">Đổi phe, giữ vai</option><option value="shield">Trao một khiên</option><option value="block">Khóa kỹ năng</option><option value="silence">Cấm nói và bỏ phiếu</option><option value="clear">Xóa hiệu ứng hỗ trợ của mục tiêu</option></select></label>`:''}${['adjudicate','disguise','transform'].includes(a.effect)?`<label class="field"><span>Vai kết quả / ngụy trang</span><select name="role"><option value="">Chọn vai nếu cần</option>${modOptions('',null)}</select></label><label class="field"><span>Phe kết quả (nếu đổi phe)</span><input name="team" maxlength="60"></label>`:''}${a.duration===2?'<p class="hint">Hiệu ứng tự hết khi kết thúc ngày ngay sau đêm này.</p>':['shield','block','silence','jail','adjudicate','disguise','redirect'].includes(a.effect)?`<label class="field"><span>Thời hạn hiệu ứng</span><select name="duration"><option value="1">Đến hết giai đoạn này</option><option value="2">Đến hết giai đoạn kế tiếp</option><option value="3">Đến hết hai giai đoạn kế tiếp</option><option value="0">Duy trì đến khi dùng / xóa</option></select></label>`:''}${!a.source&&['attack','kill','meteor','backfire','holy'].includes(a.effect)?`<label class="field"><span>Nguồn tấn công</span><select name="source"><option value="skill">Kỹ năng / đòn đã phân xử</option><option value="wolf">Bầy Sói</option><option value="solo">Sát thủ</option><option value="lynch">Treo cổ</option><option value="pierce">Bỏ qua bảo vệ</option></select></label>`:''}<label class="field"><span>Ghi chú / kết quả gửi riêng</span><textarea name="note" maxlength="1000" rows="2" ${a.effect==='adjudicate'?'required':''}></textarea></label><p id="skillError" role="alert"></p><div class="actions"><button type="button" class="secondary" data-action="skills-open" data-id="${p.id}">Quay lại</button><button class="primary" type="submit">Áp dụng kỹ năng</button></div></form>`;}
 function skillEffect(actor,a,targets,extra={}){const s=skillsState(),e={id:crypto.randomUUID(),actor:actor.id,targets:[...targets],kind:a.effect,label:a.label,created:s.phaseSerial,until:null,...extra};s.effects.push(e);return e;}
 function activeSkillEffects(id,kind){return skillsState().effects.filter(e=>e.targets.includes(id)&&(!kind||e.kind===kind));}
 function skillTeam(p){return p.modTeam||ROLES[p.role].team;}
@@ -115,7 +203,7 @@ function skillRemove(e){const s=skillsState();s.effects=s.effects.filter(x=>x.id
 function skillDeath(ids,reason='kỹ năng',pierce=true,source='skill',visited=new Set()){
  const g=state.game,dead=[];for(const id of ids){const p=byId(id);if(!p?.alive||visited.has(id))continue;visited.add(id);
  if(source==='lynch'){const shield=activeSkillEffects(id,'lynchShield')[0]||activeSkillEffects(id,'rain')[0];if(shield){skillRemove(shield);continue;}}
- if(!pierce&&source!=='lynch'){if(source==='wolf'&&skillsState().effects.some(e=>e.kind==='newMoon'))continue;const redirect=activeSkillEffects(id,'redirect').find(e=>e.targets[0]===id);if(redirect){skillRemove(redirect);dead.push(...skillDeath([redirect.targets[1]],reason,false,source,visited));continue;}const jail=activeSkillEffects(id,'jail')[0],shield=activeSkillEffects(id,'shield')[0];if(jail)continue;if(shield){skillRemove(shield);continue;}}
+ if(!pierce&&source!=='lynch'){if(source==='wolf'&&skillsState().effects.some(e=>e.kind==='newMoon'))continue;const redirect=activeSkillEffects(id,'redirect').find(e=>e.targets[0]===id);if(redirect){skillRemove(redirect);dead.push(...skillDeath([redirect.targets[1]],reason,false,source,visited));continue;}const jail=activeSkillEffects(id,'jail')[0],shield=activeSkillEffects(id,'shield')[0];if(jail)continue;if(shield){skillRemove(shield);continue;}if(blockWatchdogAttack(p,source))continue;}
 
  if(source==='wolf'&&['cursed','werewolf fan'].includes(fold(ROLES[p.role].english))){p.role='wolf';p.modTeam='Phe Sói';continue;}
  p.alive=false;p.modDeathCause=reason;dead.push(id);if(!g.mod.pending.includes(id))g.mod.pending.push(id);
@@ -128,6 +216,7 @@ function skillDeath(ids,reason='kỹ năng',pierce=true,source='skill',visited=n
 function applySkill(actorId,action,ids,options={}){
  const g=state.game;if(!g?.manual||!secret)throw Error('Chỉ quản trò được dùng kỹ năng.');const p=byId(actorId),a=action;if(!p||!a)throw Error('Không có kỹ năng.');const denied=skillUnavailable(p,a);if(denied)throw Error(denied);if(new Set(ids).size!==ids.length||ids.length<a.min||ids.length>a.max||ids.some(id=>!byId(id)))throw Error('Chọn đủ mục tiêu khác nhau.');if(a.effect!=='adjudicate'&&ids.some(id=>a.dead?byId(id).alive:!a.targetAny&&!byId(id).alive))throw Error(a.dead?'Chọn người đã chết.':'Chọn người còn sống.');
  if(['revenge','holy','attack','backfire'].includes(a.effect)&&ids.includes(p.id))throw Error('Kỹ năng này cần chọn người khác.');
+ if(a.effect==='rewind')return applyRewind(g,p,a);
  const outcome=a.effect==='adjudicate'?options.outcome||'note':a.effect;
  if(['transform','disguise'].includes(outcome)&&(!ROLES[options.role]||ROLES[options.role].random))throw Error('Chọn vai kết quả cụ thể.');
  if(a.effect==='adjudicate'&&outcome!=='note'&&!ids.length)throw Error('Chọn ít nhất một mục tiêu để thay đổi.');
@@ -147,7 +236,7 @@ function applySkill(actorId,action,ids,options={}){
  case 'role':result=ids.map(id=>{const t=byId(id),mask=activeSkillEffects(id,'disguise').at(-1);return `${t.name}: ${ROLES[mask?.role||t.role].name}`}).join('; ');break;
  case 'aura':result=ids.map(id=>`${byId(id).name}: ${skillTeam(byId(id))}`).join('; ');break;
  case 'compare':{const same=skillTeam(byId(ids[0]))===skillTeam(byId(ids[1]));result=same?'Cùng phe theo hồ sơ hiện tại':'Khác phe theo hồ sơ hiện tại';if(ROLES[p.role].english==='Analyst'&&same)p.skillRestUntil=g.round+1;break;}
- case 'packAttack':case 'attack':case 'kill':case 'infectKill':case 'entrancedKill':case 'eat':{const dead=skillDeath(ids,a.label,outcome==='kill'||options.source==='pierce',outcome==='packAttack'?'wolf':options.source||'skill');if(outcome==='packAttack')skillEffect(p,{...a,effect:'packSpent'},[],{until:s.phaseSerial});result=dead.length?'Bị loại: '+dead.map(id=>byId(id).name).join(', '):'Không ai bị loại; đòn đã bị chặn.';if(outcome==='eat')p.skillHunger=1;break;}
+ case 'packAttack':case 'attack':case 'kill':case 'infectKill':case 'entrancedKill':case 'eat':{const dead=skillDeath(ids,a.label,outcome==='kill'||(!a.source&&options.source==='pierce'),outcome==='packAttack'?'wolf':a.source||options.source||'skill');if(outcome==='packAttack')skillEffect(p,{...a,effect:'packSpent'},[],{until:s.phaseSerial});result=dead.length?'Bị loại: '+dead.map(id=>byId(id).name).join(', '):'Không ai bị loại; đòn đã bị chặn.';if(outcome==='eat')p.skillHunger=1;break;}
  case 'holy':case 'backfire':case 'meteor':case 'judge':{const target=byId(ids[0]),bad=outcome==='holy'?!skillWolf(target):skillVillage(target);const victims=outcome==='meteor'&&bad?[p.id,target.id]:[bad?p.id:target.id];skillDeath(victims,a.label,true);if(outcome==='backfire')p.skillMark=null;result=victims.map(id=>byId(id).name).join(', ')+' bị loại.';break;}
  case 'evilCompare':{if(skillTeam(byId(ids[0]))!==skillTeam(byId(ids[1])))skillDeath(ids.filter(id=>id!==p.id),a.label,true);break;}
  case 'shield':case 'block':case 'silence':case 'disguise':case 'jail':case 'redirect':add(outcome,{until,role:options.role});if(outcome==='jail')add('block',{until});break;
@@ -182,6 +271,7 @@ function applySkill(actorId,action,ids,options={}){
  case 'concuss':{const t=byId(ids[0]);if(t.skillConcussed)skillDeath(ids,a.label,true);else{t.skillConcussed=true;add('block',{until:s.phaseSerial+1})}break;}
  case 'poison':case 'bomb':case 'corrupt':case 'alchemist':{add(outcome==='bomb'?'bombDue':outcome==='alchemist'?'alchemistDue':outcome==='corrupt'?'corruptDue':'poisonDue',{due:s.phaseSerial+(outcome==='bomb'||outcome==='poison'?2:1)});if(outcome==='corrupt'){add('silence',{until:s.phaseSerial+1});add('block',{until:s.phaseSerial+1})}break;}
  case 'steal':skillRemove(activeSkillEffects(ids[0],'shield')[0]);skillEffect(p,{...a,effect:'shield'},[p.id]);break;
+ case 'watchWolf':case 'watchSolo':add(outcome,{until:s.phaseSerial});break;
  case 'note':break;
  default:throw Error('Hiệu ứng chưa được hỗ trợ.');
  }
@@ -205,7 +295,21 @@ render();
 
 const originalValidateBackupGame=validateBackupGame;
 validateBackupGame=function(raw){
- const g=originalValidateBackupGame(raw);if(!g.skills)return g;const s=g.skills,validId=id=>Number.isInteger(id)&&g.players.some(p=>p.id===id),smallString=(v,n)=>typeof v==='string'&&v.length<=n;
+ const g=originalValidateBackupGame(raw);
+ if (g.mod?.dayStarts !== undefined) {
+   if (!Array.isArray(g.mod.dayStarts) || g.mod.dayStarts.length > 3) throw Error('Mốc đầu ngày không hợp lệ.');
+   const rounds = new Set();
+   for (const day of g.mod.dayStarts) {
+     if (day?.phase !== 'day' || !Number.isInteger(day.round) || day.round < 1 || rounds.has(day.round) ||
+         !Array.isArray(day.players) || day.players.length !== g.players.length || typeof day.label !== 'string' ||
+         day.label.length > 50) throw Error('Mốc đầu ngày không hợp lệ.');
+     rounds.add(day.round);
+     const check = structuredClone({...g, mod:{...g.mod, dayStarts:undefined, snapshots:[day]}});
+     restoreModState(check, day);
+     validateBackupGame(check);
+   }
+ }
+ if(!g.skills)return g;const s=g.skills,validId=id=>Number.isInteger(id)&&g.players.some(p=>p.id===id),smallString=(v,n)=>typeof v==='string'&&v.length<=n;
  if(!s||!Array.isArray(s.effects)||s.effects.length>512||!Array.isArray(s.history)||s.history.length>1000||!s.uses||typeof s.uses!=='object'||Array.isArray(s.uses)||Object.keys(s.uses).length>3000||!Number.isInteger(s.phaseSerial)||s.phaseSerial<0||s.phaseSerial>30000)throw Error('Dữ liệu kỹ năng không hợp lệ.');
  for(const e of s.effects){if(!e||!smallString(e.id,100)||!/^[A-Za-z0-9_-]+$/.test(e.id)||!smallString(e.kind,60)||!smallString(e.label,200)||!validId(e.actor)||!Array.isArray(e.targets)||e.targets.length>24||e.targets.some(id=>!validId(id))||e.until!=null&&(!Number.isInteger(e.until)||e.until<0)||e.due!=null&&(!Number.isInteger(e.due)||e.due<0)||e.role!=null&&!ROLES[e.role]||e.delta!=null&&(!Number.isInteger(e.delta)||e.delta<0||e.delta>20))throw Error('Hiệu ứng kỹ năng không hợp lệ.');}
  for(const h of s.history)if(!h||!validId(h.actor)||!smallString(h.text,3000)||h.skillId!=null&&!smallString(h.skillId,80)||h.targets!=null&&(!Array.isArray(h.targets)||h.targets.some(id=>!validId(id))))throw Error('Lịch sử kỹ năng không hợp lệ.');

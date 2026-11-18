@@ -1,4 +1,4 @@
-const CACHE='dem-lang-v8-watchdog-scroll';
+const CACHE='dem-lang-8.0.2';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./style.css','./app.js','./skills.js','./catalog.js','./icon.svg','./manifest.webmanifest','./Ma-Soi-Dem-Lang-Offline.html','./fonts/noto-sans-regular-vi.woff','./fonts/noto-sans-bold-vi.woff','./fonts/noto-serif-regular-vi.woff'])).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()).then(()=>self.clients.matchAll({type:'window'})).then(clients=>clients.forEach(client=>client.postMessage({type:'DEM_LANG_UPDATED'})))));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==self.location.origin)return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(e.request,copy))}return res}))) });

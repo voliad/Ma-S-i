@@ -1,0 +1,902 @@
+{
+  "wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "villager": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "seer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "guard": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "witch": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "hunter": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "cupid": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "jester": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "aura": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "detective": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "bodyguard": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "priest": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "gunner": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "marksman": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "mayor": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "cursed": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "shaman": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "serial": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_analyst": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_seer_apprentice": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_junior_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_accomplice": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_admirer": {
+    "group": "neutral",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_alchemist": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_alpha_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_anarchist": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_arsonist": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_assassin": {
+    "group": "solo",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 1
+  },
+  "ext_astronomer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_baker": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_bandit": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_beast_hunter": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_bell_ringer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_blight": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_blind_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_bomber": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_bully": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_butcher": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_candy_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_cannibal": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_confusion_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_conjuror": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_corruptor": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_cowardly_lion": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_custom_random_role": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_deep_sea_terror": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_doppelganger": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_dorothy": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_drunk": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_easter_bunny": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_evil_cupid": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_evil_detective": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_evil_santa": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_ferryman": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_firework_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_flagger": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_flower_child": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_forger": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_fortune_teller": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_gambler": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_gentlewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_ghost_lady": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_ghost_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_grave_robber": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_grumpy_grandma": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_guardian_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_handsome_prince": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_headhunter": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_headless_horseman": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_idiot": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_illusionist": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_instigator": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_jailer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_jelly_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_journalist": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_judge": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_kitten_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_leprous_human": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_little_girl": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_locksmith": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_lone_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_loudmouth": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_lurker": {
+    "group": "neutral",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_mad_scientist": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 1
+  },
+  "ext_medium": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_mortician": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_naughty_boy": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_night_watchman": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_nightmare_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_nutcracker": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 1
+  },
+  "ext_pacifist": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_party_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_prayer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_preacher": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_president": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_pumpkin_dealer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_pumpkin_king": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_pumpkin_oracle": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_rainmaker": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_random": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_random_killer": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_random_regular_villager": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_random_strong_villager": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_random_voting": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_random_werewolf": {
+    "group": "random",
+    "random": true,
+    "houseRule": false,
+    "maxCount": 24
+  },
+  "ext_red_lady": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_resolutionist": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 1
+  },
+  "ext_ritualist": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_santa_claus": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sect_hunter": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sect_leader": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_shadow_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_shapeshifter": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sheriff": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sibling": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 24
+  },
+  "ext_siren": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sister": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 24
+  },
+  "ext_snatcher_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_snow_angel": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_sorcerer": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_soulbinder": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_spirit_seer": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_split_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_spy": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_storm_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_stubborn_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_swamp_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_time_traveler": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_tough_guy": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_toxic_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_trapper": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_vigilante": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_violinist": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_voodoo_werewolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_warden": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_watchdog": {
+    "group": "village",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_werewolf_berserk": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_werewolf_fan": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wise_man": {
+    "group": "village",
+    "random": false,
+    "houseRule": true,
+    "maxCount": 1
+  },
+  "ext_wizard": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_magician": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_pacifist": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_scribe": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_seer": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_summoner": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_time_traveler": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolf_trickster": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_wolffluencer": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_yule_wolf": {
+    "group": "wolf",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  },
+  "ext_zombie": {
+    "group": "solo",
+    "random": false,
+    "houseRule": false,
+    "maxCount": 1
+  }
+}
